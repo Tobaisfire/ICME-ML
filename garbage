@@ -1,0 +1,26 @@
+
+#Using cdf_to_tplot
+
+# cdf = pytplot.cdf_to_tplot(r"wget_download\wi_h1_swe_20031120_v01.cdf",notplot=True)
+# cdf.keys()
+# cdf['BX']['y']
+
+# pytplot.store_data("BX",data={'x':t_range,'y':BX})
+# pytplot.store_data("BY",data={'x':t_range,'y':BY})
+# pytplot.store_data("BZ",data={'x':t_range,'y':BZ})
+
+# pytplot.options("BX",'color','red')
+# pytplot.options("BY",'color','blue')
+# pytplot.options("BZ",'color','green')
+# pytplot.options("Bmag","ytitle",r'$B_{vec}$')
+
+# pytplot.options("BX", 'legend_names', 'BX')
+# pytplot.options("BY", 'legend_names', 'BY')
+# pytplot.options("BZ", 'legend_names', 'BZ')
+
+# pytplot.store_data("Bmag",['BX','BY','BZ'])
+# # help(pytplot.tplot_options)
+
+# pytplot.options('border','true')
+
+# pytplot.tplot(['Bmag'])
