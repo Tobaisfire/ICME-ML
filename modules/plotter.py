@@ -35,7 +35,7 @@ class Plotting:
         plt.xticks(rotation=45)     
 
         #plotting of BMAG
-        # ax[0].set_ylim(min(b_mag),max(b_mag))
+        ax[0].set_ylim(0,50)
         # ax[0].set_yticks(np.arange(0, 51, 20))
         ax[0].set_ylabel(r'$B_{mag} (nT)$')
         ax[0].plot(time_range,B_magnitude,color='black')
@@ -44,6 +44,7 @@ class Plotting:
 
 
         #Plotting for BX,BY,BZ
+        ax[1].set_ylim(-30,30)
         ax[1].set_ylabel(r'$B_{vec} (nT)$')
         # ax[1].tick_params(axis='x',)
         ax[1].plot(time_range,Bx,label ='BX',color='blue')
