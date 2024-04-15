@@ -21,11 +21,12 @@ class Plotting:
                Plasma_beta:np.array
                ):
         
-        fig,ax = plt.subplots(8, 1,sharex=True, figsize=(20, 20))
+  
+        fig,ax = plt.subplots(8, 1,sharex=True, figsize=(15, 15))
 
         # Set x-axis ticks to show intervals of 6 hours
-        hours = mdates.HourLocator(interval=5)
-        h_fmt = mdates.DateFormatter('%d %H:%M')  # Hour and minute format
+        hours = mdates.HourLocator(interval=8)
+        h_fmt = mdates.DateFormatter('%d-%m-%Y %H:%M')  # Hour and minute format
 
         plt.gca().xaxis.set_major_locator(hours)
         plt.gca().xaxis.set_major_formatter(h_fmt)
@@ -63,8 +64,11 @@ class Plotting:
 
 
         #Phi angle
+
         ax[3].set_ylabel(r'$ φ $',color='red')
+    
         ax[3].plot(time_range,phi_angle,color='red')
+        
         ax[3].grid(True)
 
 
@@ -117,12 +121,12 @@ class Plotting:
         ax[7].set_yscale('log')
         ax[7].plot(time_range,Plasma_beta,color='black')
         ax[7].set_ylabel(r'$beta (β)$')
-        ax[7].set_xlabel('Time (in UT, November,2003)')
+        # ax[7].set_xlabel('Time (in UT, November,2003)')
 
 
         ax[7].grid(True)
 
-        return plt.show()
+        
 
         
 
