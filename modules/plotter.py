@@ -11,16 +11,16 @@ class Plotting:
 
     def ipplot(self,
                time_range : np.array ,
-               B_magnitude :np.array,
-               Bx:np.array,
-               By:np.array,
-               Bz:np.array,
-               teta_angle:np.array,
-               phi_angle:np.array,
-               Vp_pvec:np.array,
-               Np_pdensity:np.array,
-               Temperature:np.array,
-               Plasma_beta:np.array
+               B_magnitude :np.array=None,
+               Bx:np.array=None,
+               By:np.array=None,
+               Bz:np.array=None,
+               teta_angle:np.array=None,
+               phi_angle:np.array=None,
+               Vp_pvec:np.array=None,
+               Np_pdensity:np.array=None,
+               Temperature:np.array=None,
+               Plasma_beta:np.array=None
                ):
         
   
