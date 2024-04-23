@@ -4,9 +4,9 @@ import numpy as np
 
 
 def merge_cdf(cdf1,cdf2,cdf3):
-    t1 = cdflib.cdfepoch.to_datetime(cdf1.varget('epoch'))
-    t2 = cdflib.cdfepoch.to_datetime(cdf2.varget('epoch'))
-    t3 = cdflib.cdfepoch.to_datetime(cdf3.varget('epoch'))
+    t1 = cdf1.varget('epoch')
+    t2 = cdf2.varget('epoch')
+    t3 = cdf3.varget('epoch')
 
     #BX,BY,BZ
 
@@ -67,7 +67,7 @@ def merge_cdf(cdf1,cdf2,cdf3):
 
 
 
-    dataset = {"t_range":m_t,
+    dataset = {"Epoch":m_t,
                "BX":m_bx,
                "BY":m_by,
                "BZ":m_bz,

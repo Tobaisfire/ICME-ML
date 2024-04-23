@@ -5,8 +5,9 @@ from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
 class Plotting:
 
-    def __init__(self,title):
+    def __init__(self,title,ad):
         self.title = title
+        self.ad = ad
     
 
     def ipplot(self,
@@ -24,9 +25,10 @@ class Plotting:
                ):
         
   
-        fig,ax = plt.subplots(8, 1,sharex=True, figsize=(15, 25))
+        fig,ax = plt.subplots(8, 1,sharex=True, figsize=(12, 15))
 
         # Set x-axis ticks to show intervals of 6 hours
+        
         hours = mdates.HourLocator(interval=8)
         h_fmt = mdates.DateFormatter('%d-%m-%Y %H:%M')  # Hour and minute format
 
@@ -39,7 +41,9 @@ class Plotting:
         ax[0].set_title(self.title) 
 
         #plotting of BMAG
+        
         ax[0].set_ylim(0,51)
+        ax[0].set_yticks(range(0, 51, 10))
         # ax[0].set_yticks(np.arange(0, 51, 20))
         ax[0].set_ylabel(r'$B_{mag} (nT)$')
         ax[0].plot(time_range,B_magnitude,color='black')
@@ -49,6 +53,7 @@ class Plotting:
 
         #Plotting for BX,BY,BZ
         ax[1].set_ylim(-30,31)
+        ax[1].set_yticks(np.arange(-30, 31, 10))
         ax[1].set_ylabel(r'$B_{vec} (nT)$')
         # ax[1].tick_params(axis='x',)
         ax[1].plot(time_range,Bx,label ='BX',color='blue')
@@ -64,7 +69,7 @@ class Plotting:
         #Tetha angle
 
         ax[2].set_ylim(-90, 90)
-        ax[2].set_yticks(range(-90, 91, 20))
+        ax[2].set_yticks(np.arange(-90, 91, 20))
         # ax[2].yaxis.set_major_locator(MultipleLocator(10))
         # ax[2].yaxis.set_major_formatter(FormatStrFormatter('%d'))
 
@@ -78,7 +83,7 @@ class Plotting:
 
         #Phi angle
         ax[3].set_ylim(0, 360)
-        ax[3].set_yticks(range(0, 361, 60))
+        ax[3].set_yticks(range(0, 361, 160))
         ax[3].set_ylabel(r'$ φ $',color='red')
    
         ax[3].plot(time_range,phi_angle,color='red')
@@ -89,6 +94,7 @@ class Plotting:
 
         #plotting vp -> pvec
         ax[4].set_ylim(200,1000)
+        ax[4].set_yticks(range(200, 1000, 200))
         ax[4].set_ylabel(r'$V_{p} (km/s)$')
         ax[4].plot(time_range,Vp_pvec,color='black')
         ax[4].grid(True, axis='y')
@@ -97,6 +103,7 @@ class Plotting:
 
         #Plotting for Np -> Proton density
         ax[5].set_ylim(0,70)
+        ax[5].set_yticks(range(0, 70, 10))
         ax[5].set_ylabel(r'$N_{p} (cm^{3})$',color='blue')
         ax[5].plot(time_range,Np_pdensity,color='blue')
         ax[5].grid(True, axis='y')
@@ -125,6 +132,7 @@ class Plotting:
         # Set y-axis limits to span the range of orders of magnitude
       
         ax[6].set_ylim(10**y_min_order, 10**y_max_order)
+        # ax[6].set_yticks(range(10**y_min_order, 10**y_max_order,10**1))
         ax[6].plot(time_range,Temperature,color='purple')
         ax[6].set_ylabel(r'$Temp (K)$',color='purple')
         ax[6].grid(True, axis='y')
@@ -140,11 +148,14 @@ class Plotting:
 
         
         ax[7].grid(True, axis='y')
+    
+        plt.savefig(f"{self.ad}/{self.title}.png",dpi =300)  # Save as PNG format
+        plt.close(fig)
 
     
 
         
-
+        
 
 
 
