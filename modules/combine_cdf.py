@@ -2,8 +2,36 @@ import cdflib
 import numpy as np
 
 
+import spacepy.pycdf as pycdf
+
+
+def make_cdf(path:str,combined_cdf:dict):
+    """
+    Function to make dict to  CDF Datasets
+    
+    path -> path where you want to save file.
+    combined_cdf -> combined cdf datasets.
+
+    """
+    
+    cdf_file_combined = pycdf.CDF(path, '')
+
+
+    for var_name, var_data in combined_cdf.items():
+        cdf_file_combined[var_name] = var_data
+
+    cdf_file_combined.close()
+
 
 def merge_cdf(cdf1,cdf2,cdf3):
+
+
+    """
+    Function to Combine CDF Datasets
+
+    cdf2,cdf2,cdf3 -> CDF FILES
+    """
+
     t1 = cdf1.varget('epoch')
     t2 = cdf2.varget('epoch')
     t3 = cdf3.varget('epoch')

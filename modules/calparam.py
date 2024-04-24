@@ -5,7 +5,17 @@ import pandas as pd
  # Bmagnitude #nT is Ok
 
 
-def thresold(var : np.array,th : int):
+def thresold(var : np.array,th : int) -> np.array:
+
+    """
+    thresold function to take Parameters of SWE H1 \
+    and remove values more than thresold value.  \
+    using interpolate.
+  
+    var -> parameters of SWE.
+
+    th -> thresold value.
+    """
     var_rm_out = []
 
     if len(var[var > th]) >= 1:
@@ -19,12 +29,14 @@ def thresold(var : np.array,th : int):
     return var_rm_out
 
 
+def bmagnitude(cdf_var : np.array) -> tuple: 
 
+    """
+    Function to calculate Bmagnitude using \
+    [BX,BY,BZ]
 
-
-
-
-def bmagnitude(cdf_var : np.array) -> tuple:  
+    cdf_var -> cdf file
+    """ 
 
     X = thresold(cdf_var['BX'],1000)
     Y = thresold(cdf_var['BY'],1000)
@@ -37,9 +49,15 @@ def bmagnitude(cdf_var : np.array) -> tuple:
     return X,Y,Z,bmag
 
 
-
 #Vp calculations
 def Vp_vec(cdf_var : np.array) -> np.array:   #Vp calculations
+
+    """
+    Function to calculate Vp which is velocity using \
+    [VX,VY,VZ]
+
+    cdf_var -> cdf file
+    """ 
     
     vX = thresold(cdf_var['Proton_VX_moment'],1e4)
     vY = thresold(cdf_var['Proton_VY_moment'],1e4)
@@ -55,9 +73,14 @@ def Vp_vec(cdf_var : np.array) -> np.array:   #Vp calculations
     return vp_vec
 
 
-
 #Temp Calculations
-def Temperature(cdf_var : np.array) -> np.array:   
+def Temperature(cdf_var : np.array) -> np.array:
+
+    """
+    Calculating Temp ---> Temp = mass of proton * (Vp**2) / 3 * Boltzman constant
+
+    """
+       
     p_wpar = cdf_var['Proton_W_moment']
 
 
@@ -71,9 +94,13 @@ def Temperature(cdf_var : np.array) -> np.array:
     return Temp
 
 
-
 #plasma Beta calculations
 def plasma_beta(n_p : np.array,Bmag: np.array ,T: np.array) -> np.array:  
+
+    """
+    Calculating plasma_Beta --->  = (Np * Boltzman constant * Temp) / ( Bmag**2 / 2*mu (Vacuum permeability))
+
+    """
 
     k_boltzmann = 1.380649e-23                      # Boltzmann constant 
     mu_0 = 4 * np.pi * 1e-7                         # Vacuum permeability in T m A^-1
@@ -93,6 +120,8 @@ def plasma_beta(n_p : np.array,Bmag: np.array ,T: np.array) -> np.array:
 
 #calculating angles ->
 def angels(bx:np.array,by:np.array,bz:np.array,bmag:np.array):
+
+    
 
     angle_rad1 = np.arctan2(-by,-bx)        # arctan if need range 90
     angle_deg1 = np.degrees(angle_rad1)
