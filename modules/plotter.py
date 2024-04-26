@@ -46,7 +46,8 @@ class Plotting:
         # plt.gca().xaxis.set_major_formatter(h_fmt)
 
         # plt.xlim(time_range[0], time_range[-1])
-        plt.xticks(rotation=45) 
+        plt.xticks(rotation=45,fontweight='bold') 
+
 
           
         ax[0].set_title(self.title) 
@@ -55,6 +56,7 @@ class Plotting:
         
         ax[0].set_ylim(0,51)
         ax[0].set_yticks(range(0, 51, 10))
+        ax[0].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         # ax[0].set_yticks(np.arange(0, 51, 20))
         ax[0].set_ylabel(r'$B_{mag} (nT)$')
         ax[0].plot(time_range,B_magnitude,color='black')
@@ -66,10 +68,10 @@ class Plotting:
         ax[1].set_ylim(-30,31)
         ax[1].set_yticks(np.arange(-30, 31, 10))
         ax[1].set_ylabel(r'$B_{vec} (nT)$')
-        # ax[1].tick_params(axis='x',)
-        ax[1].plot(time_range,Bx,label ='BX',color='blue')
-        ax[1].plot(time_range,By,label ='BY',color='green')
-        ax[1].plot(time_range,Bz,label ='BZ',color='red')
+        ax[1].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
+        ax[1].plot(time_range,Bx,label ='Bx',color='blue')
+        ax[1].plot(time_range,By,label ='By',color='green')
+        ax[1].plot(time_range,Bz,label ='Bz',color='red')
         ax[1].legend(loc="upper left",bbox_to_anchor=(1, 1))
 
         ax[1].grid(True, axis='y')
@@ -83,7 +85,7 @@ class Plotting:
         ax[2].set_yticks(np.arange(-90, 91, 20))
         # ax[2].yaxis.set_major_locator(MultipleLocator(10))
         # ax[2].yaxis.set_major_formatter(FormatStrFormatter('%d'))
-
+        ax[2].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         ax[2].set_ylabel(r'$ θ $')
         
         ax[2].plot(time_range,teta_angle,color='black')
@@ -94,7 +96,8 @@ class Plotting:
 
         #Phi angle
         ax[3].set_ylim(0, 360)
-        ax[3].set_yticks(range(0, 361, 160))
+        ax[3].set_yticks(range(0, 361, 60))
+        ax[3].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         ax[3].set_ylabel(r'$ φ $',color='red')
    
         ax[3].plot(time_range,phi_angle,color='red')
@@ -106,6 +109,7 @@ class Plotting:
         #plotting vp -> pvec
         ax[4].set_ylim(200,1000)
         ax[4].set_yticks(range(200, 1000, 200))
+        ax[4].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         ax[4].set_ylabel(r'$V_{p} (km/s)$')
         ax[4].plot(time_range,Vp_pvec,color='black')
         ax[4].grid(True, axis='y')
@@ -115,6 +119,7 @@ class Plotting:
         #Plotting for Np -> Proton density
         ax[5].set_ylim(0,70)
         ax[5].set_yticks(range(0, 70, 10))
+        ax[5].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         ax[5].set_ylabel(r'$N_{p} (cm^{3})$',color='blue')
         ax[5].plot(time_range,Np_pdensity,color='blue')
         ax[5].grid(True, axis='y')
@@ -143,7 +148,7 @@ class Plotting:
         # Set y-axis limits to span the range of orders of magnitude
       
         ax[6].set_ylim(10**y_min_order, 10**y_max_order)
-        # ax[6].set_yticks(range(10**y_min_order, 10**y_max_order,10**1))
+        ax[6].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         ax[6].plot(time_range,Temperature,color='purple')
         ax[6].set_ylabel(r'$Temp (K)$',color='purple')
         ax[6].grid(True, axis='y')
@@ -155,19 +160,20 @@ class Plotting:
         ax[7].axhline(y=1, color='r',linestyle='--')
         ax[7].plot(time_range,Plasma_beta,color='black')
         ax[7].set_ylabel(r'$beta (β)$')
-        # ax[7].set_xlabel('Time (in UT, November,2003)')
+        ax[7].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
 
         
         ax[7].grid(True, axis='y')
 
    
-        date_formatter = mdates.DateFormatter('%Y-%m-%d %H:%M')
+        date_formatter = mdates.DateFormatter('%d-%m-%Y %H:%M')
         ax[7].xaxis.set_major_formatter(date_formatter)
 
         ax[7].xaxis.set_major_locator(mdates.HourLocator([0,12]))
 
-        # ax[7].tick_params(axis='x', rotation=45)
-    
+       
+        
+  
         
         plt.savefig(f"{self.ad}/{self.title}.png",dpi =300)  # Save as PNG format
         plt.close(fig)
