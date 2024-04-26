@@ -9,7 +9,7 @@ class Plotting:
     Plotting Class for IP PLOT on SWE H1 Dataset.
     """
 
-    def __init__(self,title,ad=''):
+    def __init__(self,title,ad=r'E:\SWE\ICME-ML'):
         self.title = title
         self.ad = ad
     
@@ -37,15 +37,16 @@ class Plotting:
         fig,ax = plt.subplots(8, 1,sharex=True, figsize=(12, 15))
 
         # Set x-axis ticks to show intervals of 6 hours
+        # Hour and minute format
+        # hours = mdates.HourLocator(interval=8)
+        # h_fmt = mdates.DateFormatter('%d-%m-%Y %H:%M')  
         
-        hours = mdates.HourLocator(interval=8)
-        h_fmt = mdates.DateFormatter('%d-%m-%Y %H:%M')  # Hour and minute format
 
         # plt.gca().xaxis.set_major_locator(hours)
         # plt.gca().xaxis.set_major_formatter(h_fmt)
 
         # plt.xlim(time_range[0], time_range[-1])
-        # plt.xticks(rotation=45) 
+        plt.xticks(rotation=45) 
 
           
         ax[0].set_title(self.title) 
@@ -158,14 +159,16 @@ class Plotting:
 
         
         ax[7].grid(True, axis='y')
-        # ax[7].xaxis.set_major_locator(hours)
-        # ax[7].xaxis.set_major_formatter(h_fmt)
 
-        ax[7].set_xlim(time_range[0], time_range[-1])
-        tick_positions = np.linspace(time_range[0], time_range[-1], 5)  # Generate 5 evenly spaced tick positions
-        ax[7].set_xticks(tick_positions)  
-        ax[7].tick_params(axis='x', rotation=45)
+   
+        date_formatter = mdates.DateFormatter('%Y-%m-%d %H:%M')
+        ax[7].xaxis.set_major_formatter(date_formatter)
+
+        ax[7].xaxis.set_major_locator(mdates.HourLocator([0,12]))
+
+        # ax[7].tick_params(axis='x', rotation=45)
     
+        
         plt.savefig(f"{self.ad}/{self.title}.png",dpi =300)  # Save as PNG format
         plt.close(fig)
 
