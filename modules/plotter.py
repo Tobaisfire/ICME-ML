@@ -188,7 +188,9 @@ class Plotting:
         ax[7].set_xlim(updated_datetime, time_range[-1])
 
        
-        
+        for axes in ax:
+            for tick in axes.get_xticklabels() + axes.get_yticklabels():
+                tick.set_fontweight('bold')
   
         
         plt.savefig(f"{self.ad}/{self.title}.png",dpi =300)  # Save as PNG format
