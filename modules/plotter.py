@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+import datetime as dt
 
 class Plotting:
 
@@ -167,9 +168,24 @@ class Plotting:
 
    
         date_formatter = mdates.DateFormatter('%d-%m-%Y %H:%M')
-        ax[7].xaxis.set_major_formatter(date_formatter)
 
+
+        ax[7].xaxis.set_major_formatter(date_formatter)
         ax[7].xaxis.set_major_locator(mdates.HourLocator([0,12]))
+
+        #Time range logic
+
+        original_datetime = time_range[0]
+
+
+        date_component = original_datetime.astype('datetime64[D]')
+
+        # Calculate time difference to reset time to midnight
+        time_difference = original_datetime - date_component
+
+        # Reset time to midnight
+        updated_datetime = original_datetime - time_difference
+        ax[7].set_xlim(updated_datetime, time_range[-1])
 
        
         
