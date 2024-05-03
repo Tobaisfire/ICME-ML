@@ -49,9 +49,7 @@ class Plotting:
         # plt.xlim(time_range[0], time_range[-1])
         plt.xticks(rotation=45,fontweight='bold') 
 
-
-          
-        ax[0].set_title(self.title) 
+         
 
         #plotting of BMAG
         
@@ -60,9 +58,22 @@ class Plotting:
         ax[0].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         # ax[0].set_yticks(np.arange(0, 51, 20))
         ax[0].set_ylabel(r'$B_{mag} (nT)$')
+        # prev_idx =0
+        # for idx, ts in enumerate(time_range):
+         
+        #     ax[0].plot(time_range[prev_idx:idx+1], B_magnitude[prev_idx:idx+1],color='black')
+     
+
+        #     if idx < len(time_range) - 1 and (time_range[idx+1] - ts) > np.timedelta64(3, 'm'):
+    
+        #         ax[0].plot([ts, time_range[idx+1]], [None, None], 'w')  # Plot a blank segment
+        #         prev_idx = idx + 1
+
         ax[0].plot(time_range,B_magnitude,color='black')
         ax[0].grid(True, axis='y')
     
+
+
 
 
         #Plotting for BX,BY,BZ
@@ -70,12 +81,33 @@ class Plotting:
         ax[1].set_yticks(np.arange(-30, 31, 10))
         ax[1].set_ylabel(r'$B_{vec} (nT)$')
         ax[1].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
+        
+
+        ax[1].grid(True, axis='y')
+        # prev_idx = 0
+        # segments = {}  
+        # for idx, ts in enumerate(time_range):
+         
+        #     bx_segment, = ax[1].plot(time_range[prev_idx:idx+1], Bx[prev_idx:idx+1], label='Bx', color='blue')
+        #     by_segment, = ax[1].plot(time_range[prev_idx:idx+1], By[prev_idx:idx+1], label='By', color='green')
+        #     bz_segment, = ax[1].plot(time_range[prev_idx:idx+1], Bz[prev_idx:idx+1], label='Bz', color='red')
+
+        #     if idx < len(time_range) - 1 and (time_range[idx+1] - ts) > np.timedelta64(10, 'm'):
+        #         ax[1].plot([ts, time_range[idx+1]], [None, None], 'w')  # Plot a blank segment
+
+        #         segments['Bx'] = bx_segment
+        #         segments['By'] = by_segment
+        #         segments['Bz'] = bz_segment
+
+        #         prev_idx = idx + 1
+
+        # ax[1].legend(segments.values(), segments.keys(), loc="upper left", bbox_to_anchor=(1, 1))
+
         ax[1].plot(time_range,Bx,label ='Bx',color='blue')
         ax[1].plot(time_range,By,label ='By',color='green')
         ax[1].plot(time_range,Bz,label ='Bz',color='red')
         ax[1].legend(loc="upper left",bbox_to_anchor=(1, 1))
-
-        ax[1].grid(True, axis='y')
+        
         
 
 
@@ -84,8 +116,7 @@ class Plotting:
 
         ax[2].set_ylim(-90, 90)
         ax[2].set_yticks(np.arange(-90, 91, 20))
-        # ax[2].yaxis.set_major_locator(MultipleLocator(10))
-        # ax[2].yaxis.set_major_formatter(FormatStrFormatter('%d'))
+
         ax[2].yaxis.set_tick_params(width=2, length=6, labelcolor='black')
         ax[2].set_ylabel(r'$ θ $')
         
@@ -131,15 +162,7 @@ class Plotting:
 
         #Plotting for Temp
 
-        # ax[4].set_yscale('log')
-        # def scientific_formatter(x, pos):
-        #     if x <= 0:  # Handle zero or negative values
-        #         return '0'
-        #     else:
-        #         return f'$10^{{{int(np.log10(x))}}}$'
 
-        # # Set the y-axis tick formatter
-        # ax[4].yaxis.set_major_formatter(FuncFormatter(scientific_formatter))
 
         ax[6].set_yscale('log')
 

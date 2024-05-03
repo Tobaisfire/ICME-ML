@@ -10,7 +10,7 @@ class Scrapper1:
 
     """
 
-    def get_list( year):
+    def get_list( year,month:str,st:int,ed:int):
         """
         To get number of CDF/Dataset available in a given year.
         
@@ -19,8 +19,20 @@ class Scrapper1:
         url = f'https://cdaweb.gsfc.nasa.gov/pub/data/wind/swe/swe_h1/{year}'
         dataset_response = requests.get(url)
         name_list = [i.text for i in bs(dataset_response.content, 'html.parser').find_all('td') if i.text[-3:] == 'cdf']
-        print(f"Year {year} has {len(name_list)} dataset")
+        
+        if int(month) < 0 and st <0 and ed <0:
+            name_list = name_list
+        if  int(month) > 0 and st > 0 and ed > 0:
+            name_list = [i for i in name_list if i.split('_')[3][4:6] == str(month)]
+            print(len(name_list))
+            if ed >= len(name_list):
+                name_list = name_list
+            else:
+                name_list = name_list[st-1:ed]
 
+
+        print(f"Year {year} has {len(name_list)} dataset")
+        
         return name_list
 
   
@@ -33,9 +45,8 @@ class Scrapper1:
             
                 response = requests.get(f'https://cdaweb.gsfc.nasa.gov/pub/data/wind/swe/swe_h1/{year}/{name}')
                 if response.status_code == 200:
-                    if not os.path.exists(f'{path}/{year}'):
-                        os.makedirs(f'{path}/{year}')
-                    with open(f'{path}/{year}/{name}', 'wb') as fp:
+    
+                    with open(f'{path}/{name}', 'wb') as fp:
                         fp.write(response.content)
                     print(f"Downloaded: {name}\n")
                     break

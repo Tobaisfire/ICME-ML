@@ -26,7 +26,7 @@ def repair_nan_dummyinfo(cdf,time_range):
     k=''
     for key,data in nana_dic.items():
         if np.isnan(cdf['BX'][data['start_index']]):
-            print(key,data)
+            # print(key,data)
             k = str(key)
 
     st,ed =nana_dic[k]['start_index'],nana_dic[k]['end_index']

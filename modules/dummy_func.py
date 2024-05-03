@@ -17,7 +17,7 @@ def gen_epochs(year, month, day, interval_seconds):
     return time_ranges
 
 
-def get_dummy(day,month,year):
+def get_dummy(day,month,year,path):
     date = datetime.date(year, month, day)
     time_ranges = gen_epochs(date.year, date.month, date.day, 92)
     print(time_ranges[0],time_ranges[len(time_ranges)//2],time_ranges[-1])
@@ -127,9 +127,9 @@ def get_dummy(day,month,year):
         month = '0'+str(month)
 
     if len(str(day))<2:
-        month = '0'+str(month)  
+        day = '0'+str(day)  
          
-    cd = cdflib.cdfwrite.CDF(f'wi_h1_swe_{year}{month}{day}_v01.cdf')
+    cd = cdflib.cdfwrite.CDF(f'{path}/wi_h1_swe_{year}{month}{day}_v01.cdf')
 
 
     for data in master_zdata:
